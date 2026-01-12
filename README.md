@@ -13,5 +13,6 @@
         - Use Windows app store
 2. Enable Google Calender API
     - https://developers.google.com/workspace/calendar/api/quickstart/python
+    - Save credental.json to .env folder
 
     
