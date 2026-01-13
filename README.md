@@ -2,6 +2,7 @@
 
 1. add inputed items to calender
 2. sort calender by "Mental Capacity"
+3. Simple to use and add tasks
 
 
 # Imports

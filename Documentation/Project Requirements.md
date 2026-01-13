@@ -2,6 +2,8 @@
 # Systems
 + Output to calender
 + Read Calender
++ Input Canvas calender
+    + Canvas Integration
 + Sort tasks
     + Priority
     + Mental Load
