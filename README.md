@@ -12,9 +12,12 @@
 1. Install Python
     - Windows
         - Use Windows app store
-2. create .env folder in the root of the project
-2. Enable Google Calender API
+1. create .env folder in the root of the project
+1. Enable Google Calender API
     - https://developers.google.com/workspace/calendar/api/quickstart/python
     - Save credental.json to .env folder
+1. Install Django 
+    - https://docs.djangoproject.com/en/6.0/intro/install/
 
+    
     
