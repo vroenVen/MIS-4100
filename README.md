@@ -20,4 +20,8 @@
     - https://docs.djangoproject.com/en/6.0/intro/install/
 
     
-    
+# How to Launch
+1. go to .\OpalApp
+    - npm run dev
+1. go to .\opal
+    - python manage.py runserver
