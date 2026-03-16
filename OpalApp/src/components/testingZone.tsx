@@ -8,10 +8,10 @@ interface Task {
   type: 'event' | 'assignment';
   date: string;
   completed: boolean;
-  created_at: number;
+  createdAt: number;
 }
 
-export function TasksView() {
+export function TestingZoneView() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [showAddTask, setShowAddTask] = useState(false);
   const [taskTitle, setTaskTitle] = useState('');
@@ -82,7 +82,7 @@ export function TasksView() {
         type: taskType,
         date: taskDate,
         completed: false,
-        created_at: Date.now()
+        createdAt: Date.now()
       };
       saveTasks([...tasks, newTask]);
       setTaskTitle('');

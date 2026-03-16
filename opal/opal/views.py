@@ -8,3 +8,5 @@ def get_messages(request):
     messages = Message.objects.all()
     serializer = MessageSerializer(messages, many=True)
     return Response(serializer.data)
+
+

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { IntakeSurvey } from './components/IntakeSurvey';
 import { DailyEnergyCheck } from './components/DailyEnergyCheck';
 import { MainApp } from './components/MainApp';
+import { TestingZoneView } from './components/testingZone' 
 
 export default function App() {
 
@@ -67,5 +68,6 @@ export default function App() {
     return <DailyEnergyCheck onComplete={handleDailyCheckComplete} />;
   }
 
+  //return <TestingZoneView/>
   return <MainApp />;
 }

@@ -17,8 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from .views import get_messages
+from .tasks import get_tasks, save_tasks
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/messages/', get_messages),
+
+    path('api/tasks/get/', get_tasks),
+    path('api/tasks/save/', save_tasks),
 ]
