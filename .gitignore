@@ -10,3 +10,18 @@
 __pycache__
 db.sqlite3
 media
+local_settings.py
+
+
+local_settings.py
+
+
+### Python ###
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+
+#react
+node_modules/
+/jspm_packages/
