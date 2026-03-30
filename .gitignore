@@ -25,3 +25,4 @@ __pycache__/
 #react
 node_modules/
 /jspm_packages/
+OpalApp/node_modules/

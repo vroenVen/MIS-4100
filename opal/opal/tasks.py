@@ -3,17 +3,18 @@ from rest_framework.response import Response
 from .models import Task
 from .serializers import TaskSerializer
 
+from .Scripts import OpalAIPrompt
+
+
 @api_view(['POST'])
 def save_tasks(request):
-    print("Hello World")
-    print("DATA RECEIVED:", request.data)
     Task.objects.all().delete()  # clear existing
 
     serializer = TaskSerializer(data=request.data, many=True)
-    #print(serializer)
 
     if serializer.is_valid():
         serializer.save()
+        OpalAIPrompt.prompt(serializer)
         return Response(serializer.data, status=201)
 
     print(serializer.errors)
@@ -23,4 +24,5 @@ def save_tasks(request):
 def get_tasks(request):
     tasks = Task.objects.all()
     serializer = TaskSerializer(tasks, many=True)
+    print(serializer.data)
     return Response(serializer.data)

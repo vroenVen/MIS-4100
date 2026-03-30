@@ -11,7 +11,7 @@ class MessageSerializer(serializers.ModelSerializer):
 
 class TaskSerializer(serializers.ModelSerializer):
     id = serializers.CharField(source="task_id")
-
+    
     class Meta:
         model = Task
-        fields = ["id", "title", "type", "date", "completed", "created_at"]
+        fields = ["id", "title", "type", "date", "completed", "created_at","cognitive_load","priority"]

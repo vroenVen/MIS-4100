@@ -22,6 +22,7 @@
     
 # How to Launch
 1. go to .\OpalApp
+    - May need to run Set-ExecutionPolicy -scope Process Unrestricted
     - npm run dev
 1. go to .\opal
     - python manage.py runserver

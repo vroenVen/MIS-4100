@@ -15,3 +15,6 @@ class Task(models.Model):
     date = models.DateField()
     completed = models.BooleanField(default=False)
     created_at = models.BigIntegerField()
+    cognitive_load = models.IntegerField(default = 0)
+    priority = models.IntegerField(default = 0)
+

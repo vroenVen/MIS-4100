@@ -9,7 +9,10 @@ interface Task {
   date: string;
   completed: boolean;
   created_at: number;
+  cognitive_load: number;
+  priority: number;
 }
+
 
 export function TasksView() {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -45,6 +48,10 @@ export function TasksView() {
         body: JSON.stringify(updatedTasks),
     });
 
+    const loadTasks = async (updatedTasks: Task[]) => {
+      
+
+    }
   } catch (error) {
     console.error("Error saving to Django:", error);
   }
@@ -82,7 +89,9 @@ export function TasksView() {
         type: taskType,
         date: taskDate,
         completed: false,
-        created_at: Date.now()
+        created_at: Date.now(),
+        priority: 0,
+        cognitive_load: 0
       };
       saveTasks([...tasks, newTask]);
       setTaskTitle('');
