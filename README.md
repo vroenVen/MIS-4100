@@ -1,4 +1,4 @@
-# Minnimum viable Product
+# Minimum viable Product
 
 1. add inputed items to calender
 2. sort calender by "Mental Capacity"
