@@ -55,5 +55,5 @@
       "scripts": {
             "dev": "vite",
             "build": "vite build"
-      }
+      },"proxy": "http://localhost:8080"
 }

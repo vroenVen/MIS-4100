@@ -35,6 +35,26 @@ export function TasksView() {
     }
   }, []);
 
+  const fetchData = async () => {
+      try{
+        const response = await fetch('http://127.0.0.1:8000/api/tasks/get/');
+        
+        const data = await response.json();
+        console.log(data);
+        const tasksArray = Array.isArray(data) ? data : data.tasks || data.data;
+
+        console.log("TASKS ARRAY:", tasksArray);
+
+        localStorage.setItem('tasks', JSON.stringify(tasksArray));
+
+        
+      } catch (err){
+        console.error(err);
+      }
+
+
+  }
+
   const saveTasks = async (updatedTasks: Task[]) => {
     setTasks(updatedTasks);
     localStorage.setItem('tasks', JSON.stringify(updatedTasks));
@@ -191,6 +211,12 @@ export function TasksView() {
         >
           All
         </button>
+        <button
+          onClick={() => setFilter('all')}
+          style={filter === 'all' ? { backgroundColor: '#AA3BD1' } : { color: '#2C2E4A', borderColor: 'rgba(44, 46, 74, 0.2)' }}
+        >
+          Test
+        </button>
       </div>
 
       {/* Tasks List */}
@@ -254,7 +280,16 @@ export function TasksView() {
             </div>
           ))
         )}
+      
       </div>
+        <button
+        onClick={() => fetchData()}
+        className="fixed bottom-24 right-7 w-14 h-14 text-white rounded-full shadow-lg flex items-center justify-center transition-colors"
+        style={{ backgroundColor: '#AA3BD1' }}
+        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#9333ea'}
+        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#AA3BD1'}>
+          AI me
+      </button>
 
       {/* Add Task Button */}
       <button
