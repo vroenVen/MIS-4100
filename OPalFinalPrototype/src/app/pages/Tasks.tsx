@@ -22,12 +22,14 @@ export default function Tasks() {
   const backgroundColor = darkMode ? theme.surface : theme.background;
   const textColor = darkMode ? theme.surfaceText : theme.text;
 
-  const handleAddTask = () => {
+  const handleAddTask = async () => {
     if (newTaskTitle) {
       // In production, priority would be set by AI backend
       // For demo, randomly assign a priority to show the system working
       const demoPriority = Math.floor(Math.random() * 11); // 0-10
+      console.log("test Add task")
       
+
       addTask({
         title: newTaskTitle,
         completed: false,
@@ -38,6 +40,21 @@ export default function Tasks() {
       setNewTaskTitle("");
       setNewTaskDate("");
       setShowAddTask(false);
+      try {
+      const response = await fetch("http://127.0.0.1:8000/api/tasks/save/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(tasks), // ✅ MUST be array
+      });
+
+      const data = await response.text();
+      console.log("Saved:", data);
+
+    } catch (error) {
+      console.error("Error saving to Django:", error);
+    }
     }
   };
 
