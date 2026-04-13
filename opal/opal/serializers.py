@@ -10,7 +10,7 @@ class MessageSerializer(serializers.ModelSerializer):
 
 
 class TaskSerializer(serializers.ModelSerializer):
-    id = serializers.CharField(source="task_id")
+    # id = serializers.CharField(source="task_id")
     
     class Meta:
         model = Task
