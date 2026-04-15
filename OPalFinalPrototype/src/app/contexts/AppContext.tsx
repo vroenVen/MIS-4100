@@ -58,6 +58,7 @@ interface AppContextType {
   deleteList: (id: string) => void;
   calendarView: 'day' | 'week' | 'month';
   setCalendarView: (view: 'day' | 'week' | 'month') => void;
+  updateTasks: (tasks: Task[]) => void;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -107,6 +108,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     const newTasks = [...tasks, newTask];
     setTasks(newTasks);
     localStorage.setItem('opal-tasks', JSON.stringify(newTasks));
+    return newTasks;
   };
 
   const updateTask = (id: string, updates: Partial<Task>) => {
@@ -122,6 +124,21 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     setTasks(newTasks);
     localStorage.setItem('opal-tasks', JSON.stringify(newTasks));
   };
+
+  // const updateTasks = (tasks: string) => {
+  //   console.log(tasks);
+  //   setTasks(JSON.parse(tasks));
+  //   localStorage.setItem('opal-tasks', tasks);
+  // };
+//   const updateTasks = (tasks: Task[]) => {
+//   setTasks(tasks);
+//   localStorage.setItem('opal-tasks', JSON.stringify(tasks));
+// };
+
+const updateTasks = (newTasks: Task[]) => {
+  if (!Array.isArray(newTasks)) return;
+  setTasks(newTasks);
+};
 
   const addList = (list: Omit<List, 'id'>) => {
     const newList = { ...list, id: Date.now().toString() };
@@ -158,12 +175,14 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         addTask,
         updateTask,
         deleteTask,
+        updateTasks,
         lists,
         addList,
         updateList,
         deleteList,
         calendarView,
         setCalendarView: handleSetCalendarView,
+        
       }}
     >
       {children}

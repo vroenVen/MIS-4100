@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useApp, SubTask } from "../contexts/AppContext";
+import { useApp, SubTask, AppProvider } from "../contexts/AppContext";
 import { useTheme } from "../contexts/ThemeContext";
 import { Plus, Trash2, ChevronDown, ChevronRight, Circle, CheckCircle2, Pencil, Check, X } from "lucide-react";
 import { format, addDays, endOfWeek } from "date-fns";
@@ -7,7 +7,7 @@ import { PriorityBadge } from "../components/PriorityBadge";
 import { capitalizeFirstLetter } from "../utils/stringHelpers";
 
 export default function Tasks() {
-  const { userData, tasks, addTask, updateTask, deleteTask } = useApp();
+  const { userData, tasks, addTask, updateTask, deleteTask, updateTasks } = useApp();
   const { theme, darkMode } = useTheme();
   
   const [showAddTask, setShowAddTask] = useState(false);
@@ -30,7 +30,7 @@ export default function Tasks() {
       console.log("test Add task")
       
 
-      addTask({
+      var newTasks = addTask({
         title: newTaskTitle,
         completed: false,
         date: newTaskDate || undefined,
@@ -40,16 +40,22 @@ export default function Tasks() {
       setNewTaskTitle("");
       setNewTaskDate("");
       setShowAddTask(false);
+      console.log(newTasks);
+
       try {
       const response = await fetch("http://127.0.0.1:8000/api/tasks/save/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(tasks), // ✅ MUST be array
+        body: JSON.stringify(newTasks), // ✅ MUST be array
       });
 
-      const data = await response.text();
+
+      const data = await response.json();
+      
+//      localStorage.setItem('opal-tasks', JSON.stringify(data));
+      updateTasks(data);
       console.log("Saved:", data);
 
     } catch (error) {
