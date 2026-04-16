@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from .models import Task
 from .serializers import TaskSerializer
 
-from .Scripts import OpalAIPrompt
+from .Scripts import OpalAIPromptNew
 
 
 @api_view(['POST'])
@@ -18,18 +18,17 @@ def save_tasks(request):
         serializer.save()
         print(serializer.data)
         
-        
         data = '''
                 [
                 {
-                    "title": "a",
+                    "title": "laundry",
                     "completed": false,
                     "subtasks": [],
                     "priority": 4,
                     "id": "1776232258908"
                 },
                 {
-                    "title": "4",
+                    "title": "grocheries",
                     "completed": false,
                     "subtasks": [],
                     "priority": 6,
@@ -37,8 +36,12 @@ def save_tasks(request):
                 }
                 ]
                 '''
+        print("testing ai prompts")
+        # tasks = OpalAIPromptNew.main(json.loads(data))
+        tasks = OpalAIPromptNew.main(serializer.data)
         
-        return Response( json.loads(data),status=201);
+        return Response( tasks,status=201);
+        # return Response( json.loads(data),status=201);
         # return Response(serializer.data, status=201)
 
     print(serializer.errors)

@@ -16,8 +16,11 @@ client = OpenAI(
 ALLOWED_TYPES = {"school", "work", "personal", "other"}
 
 
-def get_user_tasks() -> list[str]:
-    tasks = input("Enter tasks separated by commas: ").strip()
+def get_user_tasks(inputTasks= None) -> list[str]:
+    if inputTasks == None :
+        tasks = input("Enter tasks separated by commas: ").strip()
+    else:
+        tasks = inputTasks
     return [t.strip() for t in tasks.split(",") if t.strip()]
 
 
@@ -50,6 +53,8 @@ Rules:
 6. Return only the JSON array.
 """.strip()
 
+def buildPrompt2():
+    return ""
 
 def extract_json(text: str):
     text = text.strip()
@@ -145,7 +150,7 @@ def build_final_tasks(validated_tasks: list[dict], today: str, created_at_ms: in
 
     for i, item in enumerate(validated_tasks, start=1):
         final_tasks.append({
-            "task_id": f"task-{i}",
+            "id": f"task-{i}",
             "title": item["title"],
             "type": item["type"],
             "date": today,
@@ -158,8 +163,16 @@ def build_final_tasks(validated_tasks: list[dict], today: str, created_at_ms: in
     return final_tasks
 
 
-def main():
-    task_list = get_user_tasks()
+def main(tasks:json):
+    #tasks = json.load(tasks)
+    a= ""
+    for t in tasks:
+        print(t["title"])
+        a = a + t["title"] + ","
+    print(a);
+    
+    task_list = get_user_tasks(a)
+    
 
     if not task_list:
         print("No tasks entered.")
@@ -189,7 +202,7 @@ def main():
 
         print("\nFinal Task JSON:\n")
         print(json.dumps(final_tasks, indent=2))
-
+        return(final_tasks)
     except Exception as e:
         print("\nModel did not return usable valid task data.\n")
         print("Raw model response:\n")
